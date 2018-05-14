@@ -1,0 +1,14 @@
+.navbar-nav {
+    li { 
+        cursor: pointer;
+
+        a:hover { 
+            // background-color: #f05000;
+            font-weight: bold;
+        }
+
+        &.selected {
+            font-weight: bold;
+        }
+    }
+}

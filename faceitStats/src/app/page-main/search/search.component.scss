@@ -1,0 +1,20 @@
+.wrapper-search {
+    .search-field {
+        .label {
+            padding-bottom: 40px;
+        }
+    }
+    .leaderboards {
+        .labels {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .games {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+        }
+    }
+}

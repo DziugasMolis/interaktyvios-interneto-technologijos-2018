@@ -1,5 +1,27 @@
-<p>
-  header works!
-</p>
-<span>{{this.number}}</span>
-<span>{{this.headerService.headerService}}</span>
+<div class="wrapper-header">
+  <nav class="navbar navbar-expand-sm navbar-light bg-secondary justify-content-center">
+    <a href="/" class="navbar-brand d-flex w-40 mr-auto"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+      <ul class="navbar-nav w-100 justify-content-center">
+        <li class="nav-item" [ngClass]="{'selected':this.activePage === navItem}" *ngFor="let navItem of navMenu">
+          <a class="nav-link text-white" (click)="setPage(navItem)">{{navItem}}</a>
+        </li>
+        <!-- <li class="nav-item">
+        <a class="nav-link text-white">TOP 100</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white">COMPARE PLAYERS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white">BEST PLAYERS BY COUNTRY</a>
+      </li> -->
+      </ul>
+      <ul class="nav navbar-nav ml-auto w-40 justify-content-end">
+
+      </ul>
+    </div>
+  </nav>
+</div>

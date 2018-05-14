@@ -1,0 +1,14 @@
+.wrapper-footer {
+
+    .footer{
+        height: 56px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        footer:hover { 
+            font-weight: bold;
+        }
+    }
+}
