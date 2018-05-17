@@ -1,8 +1,8 @@
 import { RouterModule, Routes } from '@angular/router';
-
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {HttpClientModule, HttpClient} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -12,8 +12,8 @@ import { Top100Component } from './page-main/top100/top100.component';
 import { ComparePlayersComponent } from './page-main/compare-players/compare-players.component';
 import { BestPlayersByCountryComponent } from './page-main/best-players-by-country/best-players-by-country.component';
 
-import { HeaderService } from './header/header.service';
 import { AppRoutingModule } from './app-routing.module';
+import { SearchService } from './page-main/search/search.service';
 
 
 
@@ -29,11 +29,13 @@ import { AppRoutingModule } from './app-routing.module';
 ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
 
   ],
   providers: [
-    HeaderService
+    SearchService
   ],
   bootstrap: [AppComponent]
 })

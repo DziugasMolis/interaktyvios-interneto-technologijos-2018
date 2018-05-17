@@ -1,3 +1,14 @@
-<p>
-  best-players-by-country works!
-</p>
+<div class="wrapper-best-players-by-country">
+  <div class="search-field px-5 py-5 pt-md-5 pb-md-5 mx-auto text-center">
+    <h3 class="label display-4">BEST PLAYERS BY COUNTRY</h3>
+    <div class="input-group">
+      <select class="custom-select col-sm-3" [(ngModel)]="selectedGame" (ngModelChange)="onSelectedChange($event)">
+        <option *ngFor="let game of this.searchService.games" [ngValue]="game">{{game.name}}</option>
+      </select>
+      <input type="text" class="form-control" aria-label="Text input with dropdown button">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button">SEARCH</button>
+      </div>
+    </div>
+  </div>
+</div>

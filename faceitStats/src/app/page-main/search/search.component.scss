@@ -15,6 +15,30 @@
             display: flex;
             justify-content: space-between;
             flex-direction: row;
+            .game-name {
+                cursor: pointer;
+                &.selected {
+                    font-weight: bold;
+                }
+            }
+            
+        }
+        .best-players-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            .player-box {
+                cursor: pointer;
+                margin: 25px;
+                width: 150px;
+                height: 100px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                border: 2px solid gray;
+            }
         }
     }
 }

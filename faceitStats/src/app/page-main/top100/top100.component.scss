@@ -1,0 +1,25 @@
+.wrapper-top100 {
+    .leaderboards {
+        .labels {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+        }
+        .games {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px;
+
+            .game-name {
+                cursor: pointer;
+                &.selected {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

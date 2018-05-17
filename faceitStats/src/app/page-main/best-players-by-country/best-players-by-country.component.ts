@@ -1,3 +1,4 @@
+import { SearchService } from './../search/search.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BestPlayersByCountryComponent implements OnInit {
 
-  constructor() { }
+  public selectedGame;
+  constructor(
+    public searchService: SearchService
+  ) { }
 
   ngOnInit() {
+    this.selectedGame = this.searchService.games[0];
   }
 
+
+  public onSelectedChange(event: number) {
+    console.log(event);
+  }
 }

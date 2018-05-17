@@ -1,3 +1,4 @@
+import { SearchService } from './search.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,10 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  public games = ['cs:go', 'TF:2', 'Overwatch', 'Dota2', 'LOL', 'Starcraft 2', 'World of Tanks', 'Smite'];
-  constructor() { }
+
+
+  public TOP5Players = [];
+
+  constructor(
+    public searchService: SearchService
+  ) { }
 
   ngOnInit() {
+    this.searchService.getTOPPlayersByGame(this.searchService.buildTOPURL(this.searchService.selectedGameURL, 5)).subscribe(res => {
+      this.TOP5Players = res.payload;
+      console.log(this.TOP5Players);
+    });
   }
 
+  public switchGame(game) {
+    this.searchService.selectedGame = game.index;
+    this.searchService.selectedGameURL = game.url;
+    const url = this.searchService.buildTOPURL(game.url, 5);
+    this.searchService.getTOPPlayersByGame(url).subscribe(res => {
+      this.TOP5Players = res.payload;
+      console.log(this.TOP5Players);
+    });
+  }
+
+  public redirectToPlayerPage(playerInfo: any) {
+    window.location.replace('https://www.faceit.com/en/players/' + playerInfo.user.nickname);
+  }
 }
