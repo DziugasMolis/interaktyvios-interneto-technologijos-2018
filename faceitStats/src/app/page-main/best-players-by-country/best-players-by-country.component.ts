@@ -14,7 +14,7 @@ export class BestPlayersByCountryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.selectedGame = this.searchService.games[0];
+    // this.selectedGame = this.searchService.games[0];
   }
 
 

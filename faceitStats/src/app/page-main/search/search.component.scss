@@ -11,34 +11,46 @@
             justify-content: space-between;
             align-items: center;
         }
-        .games {
-            display: flex;
-            justify-content: space-between;
-            flex-direction: row;
-            .game-name {
-                cursor: pointer;
-                &.selected {
-                    font-weight: bold;
-                }
-            }
-            
-        }
+        
         .best-players-row {
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
+            flex-wrap: wrap;
+            margin: 50px 0px;
             .player-box {
                 cursor: pointer;
                 margin: 25px;
                 width: 150px;
                 height: 100px;
+                margin: 5px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 border: 2px solid gray;
+                transition: opacity 1s, background-color 1s;
+                .onhover {
+                    display: none;
+                }
+                &:hover .player-name{
+                    display: none;
+                }
+                &:hover .elo {
+                    display: none;
+                }
+                &:hover .onhover{
+                    display: flex;
+                    color: white;
+                }
+                &:hover {
+                    opacity: 80;
+                    background-color: gray;
+                }
             }
+
+            
         }
     }
 }

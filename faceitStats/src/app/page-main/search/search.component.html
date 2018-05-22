@@ -20,14 +20,15 @@
       <h1 class="display-5">TOP 5</h1>
     </div>
     <div class="games">
-      <span class="game-name" *ngFor="let game of this.searchService.games" [ngClass]="{'selected':this.searchService.selectedGame === game.index}" (click)=switchGame(game)>{{game.name}}</span>
+      <!-- <span class="game-name" *ngFor="let game of this.searchService.games" [ngClass]="{'selected':this.searchService.selectedGame === game.index}" (click)=switchGame(game)>{{game.name}}</span> -->
     </div>
     <div class="best-players-row">
-      <div class="player-box" title="Go to users FACEIT page" *ngFor="let player of TOP5Players" (click)="redirectToPlayerPage(player)">
-        <span class="player-name">{{player.user.nickname}}</span>
-        <span class="elo">{{player.elo}}</span>
+      <div class="player-box" *ngFor="let player of this.searchService.TOPPlayers" (click)="redirectToPlayerPage(player)">
+        <span class="player-name"><span class="{{this.searchService.getCountry(player.user.country)}} "></span>{{player.user.nickname}}</span>
+        <span class="elo">ELO: {{player.elo}}</span>
+        <span class="onhover">USER FACEIT PAGE</span>
       </div>
     </div>
-    <button type="button" class="btn btn-primary btn-lg btn-block">GO TO TOP 100</button>
+    <button type="button" class="btn btn-primary btn-lg btn-block" (click)="goToTOP100()">GO TO TOP 100</button>
   </div>
 </div>

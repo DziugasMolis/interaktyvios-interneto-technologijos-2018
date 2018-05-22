@@ -4,35 +4,23 @@
       <h1 class="display-5">LEADERBOARDS</h1>
       <h1 class="display-5">TOP 100</h1>
     </div>
-    <div class="games">
-      <span class="game-name" *ngFor="let game of this.searchService.games" [ngClass]="{'selected':this.searchService.selectedGame === game.index}"
-        (click)=switchGame(game)>{{game.name}}</span>
-    </div>
     <table class="table table-striped">
       <thead>
         <tr>
           <th>Rank</th>
-          <th>Country</th>
           <th>Nickname</th>
           <th>Skill level</th>
           <th>ELO</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let player of TOP100Players">
+        <tr *ngFor="let player of this.searchService.TOPPlayers">
           <td>#{{player.position}}</td>
-          <td>{{player.user.country}}</td>
-          <td>{{player.user.nickname}}</td>
+          <td><span class="{{this.searchService.getCountry(player.user.country)}} "></span>{{player.user.nickname}}</td>
           <td>{{player.skillLevel}}</td>
           <td>{{player.elo}}</td>
         </tr>
       </tbody>
     </table>
-    <!-- <div class="best-players-row">
-    <div class="player-box" title="Go to users FACEIT page" *ngFor="let player of TOP5Players" (click)="redirectToPlayerPage(player)">
-      <span class="player-name">{{player.user.nickname}}</span>
-      <span class="elo">{{player.elo}}</span>
-    </div>
-  </div> -->
   </div>
 </div>

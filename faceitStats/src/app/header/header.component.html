@@ -6,7 +6,7 @@
     </button>
     <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
       <ul class="navbar-nav w-100 justify-content-center">
-        <li class="nav-item" [ngClass]="{'selected':this.activePage === navItem}" *ngFor="let navItem of navMenu">
+        <li class="nav-item" [ngClass]="{'selected':this.searchService.activePage === navItem}" *ngFor="let navItem of navMenu">
           <a class="nav-link text-white" (click)="setPage(navItem)">{{navItem}}</a>
         </li>
         <!-- <li class="nav-item">
@@ -24,4 +24,12 @@
       </ul>
     </div>
   </nav>
+  <h4 class="display-5 text-center">SELECTED GAME</h4>
+  <div class="games px-5 py-5 pt-md-1 pb-md-3 mx-auto text-center">
+    <span class="game-item" *ngFor="let game of games" [ngClass]="{'selected':this.searchService.selectedGame === game.key}" (click)=switchGame(game)>{{game.name}}</span>
+  </div>
+  <h4 class="display-5 text-center">REGION</h4>
+  <div class="regions px-5 py-5 pt-md-1 pb-md-2 mx-auto text-center">
+    <span class="region-item" *ngFor="let region of selectedRegions" [ngClass]="{'selected':this.searchService.selectedRegion === region.value}" (click)=switchRegion(region)>{{region.value}}</span>
+  </div>
 </div>

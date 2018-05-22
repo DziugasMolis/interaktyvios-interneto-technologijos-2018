@@ -5,18 +5,14 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class SearchService {
 
-    public games = [
-        { name: 'CS:GO', url: 'csgo', index: 0 },
-        { name: 'TF:2', url: 'tf2', index: 1 },
-        { name: 'OVERWATCH EU', url: 'overwatch_EU', index: 2 },
-        { name: 'DOTA2', url: 'dota2', index: 3 },
-        { name: 'LOL EUW', url: 'lol_EUW', index: 4 },
-        // { name: 'STARCRAFT:2', url:'', index: 5 },
-        { name: 'WORLD OF TANKS EU', url: 'wot_EU', index: 6 },
-        { name: 'SMITE', url: 'smite', index: 7 },
-    ];
-    public selectedGame = 0;
+
+    public selectedGame = 'csgo';
     public selectedGameURL = 'csgo';
+    public TOPPlayers = [];
+    public selectedRegion = {};
+    public selectedRegionLink = '';
+    public activePage = 'SEARCH';
+
     constructor(public http: HttpClient) { }
 
 
@@ -26,13 +22,11 @@ export class SearchService {
 
     }
 
-    public buildTOPURL(gameURL: string, playersLimit: number) {
-        if (gameURL === 'lol_EUW') {
-            return 'https://api.faceit.com/ranking/v1/globalranking/' + gameURL + '/EUW?limit=' + playersLimit + '&position=0';
-        }
+    public buildTOPURL(gameURL: string, region: string, playersLimit: number) {
+        return 'https://api.faceit.com/ranking/v1/globalranking/' + gameURL + '/' + region + '?limit=' + playersLimit + '&position=0';
+    }
 
-        else {
-            return 'https://api.faceit.com/ranking/v1/globalranking/' + gameURL + '/EU?limit=' + playersLimit + '&position=0';
-        }
+    public getCountry(country: string) {
+        return 'flag-icon flag-icon-' + country;
     }
 }

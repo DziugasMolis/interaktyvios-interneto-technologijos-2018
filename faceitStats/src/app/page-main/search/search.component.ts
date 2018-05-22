@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { SearchService } from './search.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,31 +10,28 @@ import { Component, OnInit } from '@angular/core';
 export class SearchComponent implements OnInit {
 
 
-
-  public TOP5Players = [];
-
   constructor(
+    private router: Router,
     public searchService: SearchService
   ) { }
 
   ngOnInit() {
-    this.searchService.getTOPPlayersByGame(this.searchService.buildTOPURL(this.searchService.selectedGameURL, 5)).subscribe(res => {
-      this.TOP5Players = res.payload;
-      console.log(this.TOP5Players);
-    });
-  }
-
-  public switchGame(game) {
-    this.searchService.selectedGame = game.index;
-    this.searchService.selectedGameURL = game.url;
-    const url = this.searchService.buildTOPURL(game.url, 5);
-    this.searchService.getTOPPlayersByGame(url).subscribe(res => {
-      this.TOP5Players = res.payload;
-      console.log(this.TOP5Players);
+    this.searchService.getTOPPlayersByGame(
+      this.searchService.buildTOPURL(this.searchService.selectedGameURL, this.searchService.selectedRegionLink, 5)
+  )
+    .subscribe(res => {
+      this.searchService.TOPPlayers = res.payload;
+      console.log(this.searchService.TOPPlayers);
     });
   }
 
   public redirectToPlayerPage(playerInfo: any) {
     window.location.replace('https://www.faceit.com/en/players/' + playerInfo.user.nickname);
+  }
+
+  goToTOP100() {
+    this.router.navigate(['top100']);
+    this.searchService.activePage = 'TOP 100';
+    document.documentElement.scrollTop = 0;
   }
 }
