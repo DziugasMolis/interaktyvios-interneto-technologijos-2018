@@ -1,3 +1,16 @@
-.wrapper-best-players-by-country{
-    
+.wrapper-best-players-by-country {
+    .search-field {
+        .country-select {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 20px;
+            .country-name {
+                padding-right: 20px;
+            }
+        }
+    }
+    .flag {
+        padding-left: 25px;
+    }
 }

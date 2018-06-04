@@ -1,3 +1,39 @@
-<p>
-  compare-players works!
-</p>
+<div class="wrapper-compare-players">
+  <div class="compare-players-field px-5 py-5">
+    <h3 class="label display-4 text-center">COMPARE PLAYERS</h3>
+    <div class="input-box">
+      <div class="input-group">
+        <input type="text" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="playerInput" (keyup.enter)="addPlayer()">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" (click)="addPlayer()">ADD</button>
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th *ngFor="let playerName of playersNameArray">{{playerName}}</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="statsKeys.length !== 0">
+        <tr *ngFor="let key of statsKeys">
+          <td>{{key}}</td>
+          <td *ngFor="let playerStats of playerStats[key]">{{playerStats}}</td>
+        </tr>
+        <tr>
+          <td>ELO</td>
+          <td *ngFor="let elo of eloArray">{{elo}}</td>
+        </tr>
+        <tr>
+          <td>Skill Level</td>
+          <td *ngFor="let level of levelArray">{{level}}</td>
+        </tr>
+        <tr>
+          <td>Remove</td>
+          <td *ngFor="let level of levelArray; let i = index"><i class="fa fa-minus-square" (click)=removePlayer(i)></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -232,6 +232,16 @@ export class HeaderComponent implements OnInit {
         console.log(this.searchService.TOPPlayers);
       });
     }
+    else if (this.searchService.activePage === 'BEST PLAYERS BY COUNTRY') {
+      console.log('a');
+      const url = this.searchService.buildTopURLByCountry(this.searchService.selectedGameURL,
+        this.searchService.selectedRegionLink, this.searchService.selectedCountry.toLowerCase(), 50);
+      this.searchService.TOPPlayers.length = 0;
+      this.searchService.getTOPPlayersByGame(url).subscribe(res => {
+        this.searchService.TOPPlayers = res.payload;
+        console.log(this.searchService.TOPPlayers);
+      });
+    }
   }
 
   setGameURLForOverwatch(regionKey: string) {

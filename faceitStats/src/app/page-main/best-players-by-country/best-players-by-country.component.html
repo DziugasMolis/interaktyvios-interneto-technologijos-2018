@@ -1,7 +1,7 @@
 <div class="wrapper-best-players-by-country">
-  <div class="search-field px-5 py-5 pt-md-5 pb-md-5 mx-auto text-center">
-    <h3 class="label display-4">BEST PLAYERS BY COUNTRY</h3>
-    <div class="input-group">
+  <div class="search-field px-5 py-5">
+    <h3 class="label display-4 text-center">BEST PLAYERS BY COUNTRY</h3>
+    <!-- <div class="input-group">
       <select class="custom-select col-sm-3" [(ngModel)]="selectedGame" (ngModelChange)="onSelectedChange($event)">
         <option *ngFor="let game of this.searchService.games" [ngValue]="game">{{game.name}}</option>
       </select>
@@ -9,6 +9,33 @@
       <div class="input-group-append">
         <button class="btn btn-outline-secondary" type="button">SEARCH</button>
       </div>
+    </div> -->
+    <div class="country-select">
+      <span class="country-name">Country:</span>
+      <div class="input-group">
+        <select class="custom-select col-sm-6" [(ngModel)]="this.searchService.selectedCountry" (ngModelChange)="onCountryChange($event)">
+          <option *ngFor="let country of this.countriesList" [ngValue]="country.code">{{country.name}}</option>
+        </select>
+      </div>
     </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Nickname</th>
+          <th>Skill level</th>
+          <th>ELO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let player of this.searchService.TOPPlayers">
+          <td>#{{player.position}}</td>
+          <td>
+            <span class="{{this.searchService.getCountry(player.user.country)}} flag"></span>{{player.user.nickname}}</td>
+          <td>{{player.skillLevel}}</td>
+          <td>{{player.elo}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

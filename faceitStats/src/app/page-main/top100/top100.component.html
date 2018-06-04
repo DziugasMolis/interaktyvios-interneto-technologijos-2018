@@ -16,7 +16,7 @@
       <tbody>
         <tr *ngFor="let player of this.searchService.TOPPlayers">
           <td>#{{player.position}}</td>
-          <td><span class="{{this.searchService.getCountry(player.user.country)}} "></span>{{player.user.nickname}}</td>
+          <td><span class="{{this.searchService.getCountry(player.user.country)}} flag"></span>{{player.user.nickname}}</td>
           <td>{{player.skillLevel}}</td>
           <td>{{player.elo}}</td>
         </tr>

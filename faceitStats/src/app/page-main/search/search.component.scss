@@ -31,6 +31,10 @@
                 align-items: center;
                 border: 2px solid gray;
                 transition: opacity 1s, background-color 1s;
+
+                .flag {
+                    padding-left: 25px;
+                }
                 .onhover {
                     display: none;
                 }

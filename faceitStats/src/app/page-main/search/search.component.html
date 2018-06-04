@@ -24,7 +24,7 @@
     </div>
     <div class="best-players-row">
       <div class="player-box" *ngFor="let player of this.searchService.TOPPlayers" (click)="redirectToPlayerPage(player)">
-        <span class="player-name"><span class="{{this.searchService.getCountry(player.user.country)}} "></span>{{player.user.nickname}}</span>
+        <span class="player-name"><span class="{{this.searchService.getCountry(player.user.country)}} flag"></span>{{player.user.nickname}}</span>
         <span class="elo">ELO: {{player.elo}}</span>
         <span class="onhover">USER FACEIT PAGE</span>
       </div>
