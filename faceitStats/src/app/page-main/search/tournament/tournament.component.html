@@ -1,0 +1,59 @@
+<div class="wrapper-tournament">
+  <div class="tournament px-5 py-5" *ngIf="tournamentData">
+    <h1 class="label display-4 text-center">{{tournamentData['name']}}</h1>
+    <img src="{{tournamentData['cover_image']}}" width="100%">
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Total prize</th>
+          <th>Team slots</th>
+          <th>Max skill level</th>
+          <th>Game mode</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{tournamentData['total_prize']}} FACEIT Points</td>
+          <td>{{tournamentData['number_of_players']}}</td>
+          <td>{{tournamentData['max_skill']}}</td>
+          <td>{{tournamentData['match_type']}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Region</th>
+          <th>Start</th>
+          <th>Anticheat</th>
+          <th>Registred teams</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{tournamentData['region']}} FACEIT Points</td>
+          <td>{{this.searchService.timeConverter(tournamentData['started_at'])}}</td>
+          <td>{{anticheat(tournamentData['anticheat_required'])}}</td>
+          <td>{{tournamentData['number_of_players_participants']}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="label display-5 text-center" *ngIf="teamsNames.lenght !== 0">There is no joined teams</h3>
+    <h3 class="label display-5 text-center" *ngIf="teamsNames.lenght === 0">Joined teams</h3>
+    <table class="table table-striped" *ngIf="teamsNames.lenght === 0">
+      <thead>
+        <tr>
+          <th>Team</th>
+          <th>Skill level</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let nick of teamsNames; let i = index">
+          <td>{{nick}}</td>
+          <td>{{teamsSkillLevel[i]}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

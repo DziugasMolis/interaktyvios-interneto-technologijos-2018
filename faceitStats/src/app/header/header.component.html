@@ -24,12 +24,16 @@
       </ul>
     </div>
   </nav>
-  <h4 class="display-5 text-center">SELECTED GAME</h4>
-  <div class="games px-5 py-5 pt-md-1 pb-md-3 mx-auto text-center">
-    <span class="game-item" *ngFor="let game of games" [ngClass]="{'selected':this.searchService.selectedGame === game.key}" (click)=switchGame(game)>{{game.name}}</span>
-  </div>
-  <h4 class="display-5 text-center">REGION</h4>
-  <div class="regions px-5 py-5 pt-md-1 pb-md-2 mx-auto text-center">
-    <span class="region-item" *ngFor="let region of selectedRegions" [ngClass]="{'selected':this.searchService.selectedRegion === region.value}" (click)=switchRegion(region)>{{region.value}}</span>
+  <div *ngIf="checkForPage()">
+    <h4 class="display-5 text-center">SELECTED GAME</h4>
+    <div class="games px-5 py-5 pt-md-1 pb-md-3 mx-auto text-center">
+      <span class="game-item" *ngFor="let game of games" [ngClass]="{'selected':this.searchService.selectedGame === game.key}"
+        (click)=switchGame(game)>{{game.name}}</span>
+    </div>
+    <h4 class="display-5 text-center">REGION</h4>
+    <div class="regions px-5 py-5 pt-md-1 pb-md-2 mx-auto text-center">
+      <span class="region-item" *ngFor="let region of selectedRegions" [ngClass]="{'selected':this.searchService.selectedRegion === region.value}"
+        (click)=switchRegion(region)>{{region.value}}</span>
+    </div>
   </div>
 </div>

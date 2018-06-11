@@ -1,3 +1,6 @@
+import { PlayerComponent } from './page-main/search/player/player.component';
+import { TournamentComponent } from './page-main/search/tournament/tournament.component';
+import { TeamComponent } from './page-main/search/team/team.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -26,7 +29,10 @@ import { SearchService } from './page-main/search/search.service';
     SearchComponent,
     Top100Component,
     ComparePlayersComponent,
-    BestPlayersByCountryComponent
+    BestPlayersByCountryComponent,
+    TeamComponent,
+    TournamentComponent,
+    PlayerComponent
 ],
   imports: [
     BrowserModule,

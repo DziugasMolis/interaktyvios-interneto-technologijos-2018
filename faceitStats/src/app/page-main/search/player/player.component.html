@@ -1,0 +1,17 @@
+<div class="wrapper-player">
+  <div class="player px-5 py-5">
+    <div class="initial-info">
+      <h1 class="label display-4 text-center">
+        <img src="{{playerData['avatar']}}" height="100" width="100"> {{playerData['nickname']}}
+        <span class="{{this.searchService.getCountry(playerData['country'])}} flag"></span>
+      </h1>
+      <div class="social-media">
+          <i class="fa fa-twitch"></i>
+          <i class="fa fa-facebook-square"></i>
+          <i class="fa fa-twitter-square"></i>
+          <i class="fa fa-youtube-square"></i>
+          <i class="fa fa-steam-square"></i>
+      </div>
+    </div>
+  </div>
+</div>

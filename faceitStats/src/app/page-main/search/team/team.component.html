@@ -1,0 +1,26 @@
+<div class="wrapper-team">
+  <div class="team px-5 py-5">
+    <h1 class="label display-4 text-center">TEAM</h1>
+    <div class="team-name text-center">
+      <img src="{{teamInfo['avatar']}}" height="100" width="100" *ngIf="teamInfo['avatar']">
+      <span class="bold">{{teamInfo['name']}}</span>
+    </div>
+    <div class="players">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nickname</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let player of teamInfo['members']">
+            <td>
+              <img src="{{player['avatar']}}" height="50" width="50"> {{player['nickname']}}
+              <span class="{{this.searchService.getCountry(player['country'])}} flag"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+.wrapper-player {
+    .player {
+        .initial-info {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            .social-media {
+                display: flex;
+                flex-direction: column;
+                margin-left: 25%;
+                i {
+                    font-size: 35px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

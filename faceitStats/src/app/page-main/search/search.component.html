@@ -2,17 +2,36 @@
   <div class="search-field px-5 py-5 pt-md-5 pb-md-5 mx-auto text-center">
     <h1 class="label display-4">SEARCH</h1>
     <div class="input-group">
-      <select class="custom-select col-sm-2">
-        <option selected>Choose...</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select class="custom-select col-sm-2" (change)="searchOptionChange($event.target.value)">
+        <option selected value="player">Player</option>
+        <option value="team">Team</option>
+        <option value="tournament">Tournament</option>
       </select>
-      <input type="text" class="form-control" aria-label="Text input with dropdown button">
+      <input #searh type="text" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="searchInput" (input)=search($event.target.value) (keyup.enter)="selectFirstSearchElement(searchValues[0])">
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button">SEARCH</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="selectFirstSearchElement(searchValues[0])">SEARCH</button>
+      </div>
+      <div class="search-dropdown" *ngIf="searchInput">
+        <div *ngIf="this.searchType === 'player'">
+          <div class="value" *ngFor="let v of searchValues" (click)="routeToPlayer(v)">
+            <img src="{{v['avatar']}}" height="34">{{v['nickname']}}
+            <span class="{{this.searchService.getCountry(v['country'])}} flag"></span>
+          </div>
+        </div>
+        <div *ngIf="this.searchType === 'team'">
+          <div class="value" *ngFor="let v of searchValues" (click)="routeToTeam(v)">
+            <img src="{{v['avatar']}}" height="34">{{v['name']}}
+            <!-- <span class="{{this.searchService.getCountry(v['country'])}} flag"></span> -->
+          </div>
+        </div>
+        <div *ngIf="this.searchType === 'tournament'">
+          <div class="value tournament" *ngFor="let v of searchValues" (click)="routeToTournament(v)">
+            {{this.searchService.timeConverter(v['started_at'])}} {{v['name']}}
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
   <div class="leaderboards px-5 py-5">
     <div class="labels">
@@ -24,7 +43,8 @@
     </div>
     <div class="best-players-row">
       <div class="player-box" *ngFor="let player of this.searchService.TOPPlayers" (click)="redirectToPlayerPage(player)">
-        <span class="player-name"><span class="{{this.searchService.getCountry(player.user.country)}} flag"></span>{{player.user.nickname}}</span>
+        <span class="player-name">
+          <span class="{{this.searchService.getCountry(player.user.country)}} flag"></span>{{player.user.nickname}}</span>
         <span class="elo">ELO: {{player.elo}}</span>
         <span class="onhover">USER FACEIT PAGE</span>
       </div>

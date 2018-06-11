@@ -3,6 +3,23 @@
         .label {
             padding-bottom: 40px;
         }
+        .search-dropdown {
+            margin-top: 40px;
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            max-height: 100px;
+            background: #F6F6F6;
+            overflow-y: auto; 
+            .value{
+                padding: 5px;
+                cursor: pointer;
+                &:hover {
+                    background-color: #C2C2C2;
+                }
+            }
+        }
+        
     }
     .leaderboards {
         .labels {
@@ -11,7 +28,6 @@
             justify-content: space-between;
             align-items: center;
         }
-        
         .best-players-row {
             display: flex;
             flex-direction: row;
@@ -31,20 +47,19 @@
                 align-items: center;
                 border: 2px solid gray;
                 transition: opacity 1s, background-color 1s;
-
                 .flag {
                     padding-left: 25px;
                 }
                 .onhover {
                     display: none;
                 }
-                &:hover .player-name{
+                &:hover .player-name {
                     display: none;
                 }
                 &:hover .elo {
                     display: none;
                 }
-                &:hover .onhover{
+                &:hover .onhover {
                     display: flex;
                     color: white;
                 }
@@ -53,8 +68,6 @@
                     background-color: gray;
                 }
             }
-
-            
         }
     }
 }

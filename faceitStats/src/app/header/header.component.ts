@@ -275,4 +275,15 @@ export class HeaderComponent implements OnInit {
       return 'wot_NA';
     }
   }
+
+  checkForPage() {
+    if (this.searchService.activePage === 'player' ||
+      this.searchService.activePage === 'team' ||
+      this.searchService.activePage === 'tournament') {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
 }
