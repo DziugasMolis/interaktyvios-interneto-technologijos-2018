@@ -8,10 +8,31 @@
                 display: flex;
                 flex-direction: column;
                 margin-left: 25%;
-                i {
+                a {
                     font-size: 35px;
                     cursor: pointer;
                 }
+                .empty {
+                    opacity: 0.2;
+                }
+            }
+        }
+        table {
+            width: 50%;
+            font-size: 12px;
+            
+        }
+        .stats {
+            margin: 10px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            .round-graph {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 50%;
             }
         }
     }

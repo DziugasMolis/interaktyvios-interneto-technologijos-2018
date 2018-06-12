@@ -6,11 +6,419 @@
         <span class="{{this.searchService.getCountry(playerData['country'])}} flag"></span>
       </h1>
       <div class="social-media">
-          <i class="fa fa-twitch"></i>
-          <i class="fa fa-facebook-square"></i>
-          <i class="fa fa-twitter-square"></i>
-          <i class="fa fa-youtube-square"></i>
-          <i class="fa fa-steam-square"></i>
+        <a class="fa fa-twitch" [ngClass]="{'empty': true}"></a>
+        <a class="fa fa-facebook-square" [ngClass]="{'empty': true}"></a>
+        <a class="fa fa-twitter-square" [ngClass]="{'empty': true}"></a>
+        <a class="fa fa-youtube-square" [ngClass]="{'empty': true}"></a>
+        <a class="fa fa-steam-square" href="{{'http://steamcommunity.com/profiles/'+ playerData['steam_id_64']}}" [ngClass]="{'empty': !playerData['steam_id_64']}"></a>
+      </div>
+    </div>
+    <div class="csgo" *ngIf="gamesStats['csgo']">
+      <h4 class="label display-5 text-center">CSGO Statistics</h4>
+      <img src="https://cdn.faceit.com/games/game-covers/csgo_game_cover_2000x100.jpg" width="100%" height="100px">
+      <div class="stats">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <th>ELO</th>
+              <th>{{elo['csgo'][0]}}</th>
+            </tr>
+            <tr>
+                <th>Skill level</th>
+                <th>{{elo['csgo'][1]}}</th>
+              </tr>
+            <tr *ngFor="let stat of gamesStats['csgo']">
+              <th>{{stat[0]}}</th>
+              <th>{{setWinsAndLoses(stat[1])}}</th>
+              <!-- <th>{{gamesStats['csgo'][{{stat}}][0]}}</th> -->
+            </tr>
+          </tbody>
+        </table>
+        <div class="round-graph">
+          <span>Matches</span>
+          <div style="display: block">
+            <canvas baseChart
+                    [data]="pieChartDataCSGO"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tf2" *ngIf="gamesStats['tf2']">
+      <h4 class="label display-5 text-center">Team fortress 2 Statistics</h4>
+      <img src="https://cdn.faceit.com/games/game-covers/tf2_game_cover_2000x100.jpg" width="100%" height="100px">
+      <div class="stats">
+        <table class="table table-bordered">
+          <tbody>
+              <tr>
+                  <th>ELO</th>
+                  <th>{{elo['tf2'][0]}}</th>
+                </tr>
+                <tr>
+                    <th>Skill level</th>
+                    <th>{{elo['tf2'][1]}}</th>
+                  </tr>
+            <tr *ngFor="let stat of gamesStats['tf2']">
+              <th>{{stat[0]}}</th>
+              <th>{{setWinsAndLoses(stat[1])}}</th>
+              <!-- <th>{{gamesStats['csgo'][{{stat}}][0]}}</th> -->
+            </tr>
+          </tbody>
+        </table>
+        <div class="round-graph">
+          <span>Matches</span>
+          <div style="display: block">
+            <canvas baseChart
+                    [data]="pieChartData_tf2"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="overwatch-eu" *ngIf="gamesStats['overwatch_EU']">
+      <h4 class="label display-5 text-center">Overwatch EU Statistics</h4>
+      <img src="https://cdn.faceit.com/games/game-covers/overwatch_game_cover_2000x100.jpg" width="100%" height="100px">
+      <div class="stats">
+        <table class="table table-bordered">
+          <tbody>
+              <tr>
+                  <th>ELO</th>
+                  <th>{{elo['overwatch_EU'][0]}}</th>
+                </tr>
+                <tr>
+                    <th>Skill level</th>
+                    <th>{{elo['overwatch_EU'][1]}}</th>
+                  </tr>
+            <tr *ngFor="let stat of gamesStats['overwatch_EU']">
+              <th>{{stat[0]}}</th>
+              <th>{{setWinsAndLoses(stat[1])}}</th>
+              <!-- <th>{{gamesStats['csgo'][{{stat}}][0]}}</th> -->
+            </tr>
+          </tbody>
+        </table>
+        <div class="round-graph">
+          <span>Matches</span>
+          <div style="display: block">
+            <canvas baseChart
+                    [data]="pieChartData_ov_eu"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="overwatch-us" *ngIf="gamesStats['overwatch_US']">
+      <h4 class="label display-5 text-center">Overwatch US Statistics</h4>
+      <img src="https://cdn.faceit.com/games/game-covers/overwatch_game_cover_2000x100.jpg" width="100%" height="100px">
+      <div class="stats">
+        <table class="table table-bordered">
+          <tbody>
+              <tr>
+                  <th>ELO</th>
+                  <th>{{elo['overwatch_US'][0]}}</th>
+                </tr>
+                <tr>
+                    <th>Skill level</th>
+                    <th>{{elo['overwatch_US'][1]}}</th>
+                  </tr>
+            <tr *ngFor="let stat of gamesStats['overwatch_US']">
+              <th>{{stat[0]}}</th>
+              <th>{{setWinsAndLoses(stat[1])}}</th>
+              <!-- <th>{{gamesStats['csgo'][{{stat}}][0]}}</th> -->
+            </tr>
+          </tbody>
+        </table>
+        <div class="round-graph">
+          <span>Matches</span>
+          <div>
+            <canvas baseChart
+                    [data]="pieChartData_ov_us"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dota2" *ngIf="gamesStats['dota2']">
+      <h4 class="label display-5 text-center">Dota 2 Statistics</h4>
+      <img src="https://cdn.faceit.com/games/game-covers/dota2_game_cover_2000x100.jpg" width="100%" height="100px">
+      <div class="stats">
+        <table class="table table-bordered">
+          <tbody>
+              <tr>
+                  <th>ELO</th>
+                  <th>{{elo['dota2'][0]}}</th>
+                </tr>
+                <tr>
+                    <th>Skill level</th>
+                    <th>{{elo['dota2'][1]}}</th>
+                  </tr>
+            <tr *ngFor="let stat of gamesStats['dota2']">
+              <th>{{stat[0]}}</th>
+              <th>{{setWinsAndLoses(stat[1])}}</th>
+              <!-- <th>{{gamesStats['csgo'][{{stat}}][0]}}</th> -->
+            </tr>
+          </tbody>
+        </table>
+        <div class="round-graph">
+          <span>Matches</span>
+          <div>
+            <canvas baseChart
+                    [data]="pieChartData_dota2"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lol-euw" *ngIf="gamesStats['lol_EUW']">
+      <h4 class="label display-5 text-center">League of legends EU West Statistics</h4>
+      <img src="https://cdn.faceit.com/games/game-covers/lol_game_cover_2000x100.jpg" width="100%" height="100px">
+      <div class="stats">
+        <table class="table table-bordered">
+          <tbody>
+              <tr>
+                  <th>ELO</th>
+                  <th>{{elo['lol_EUW'][0]}}</th>
+                </tr>
+                <tr>
+                    <th>Skill level</th>
+                    <th>{{elo['lol_EUW'][1]}}</th>
+                  </tr>
+            <tr *ngFor="let stat of gamesStats['lol_EUW']">
+              <th>{{stat[0]}}</th>
+              <th>{{setWinsAndLoses(stat[1])}}</th>
+              <!-- <th>{{gamesStats['csgo'][{{stat}}][0]}}</th> -->
+            </tr>
+          </tbody>
+        </table>
+        <div class="round-graph">
+          <span>Matches</span>
+          <div>
+            <canvas baseChart
+                    [data]="pieChartData_loleuw"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lol-eune" *ngIf="gamesStats['lol_EUN']">
+      <h4 class="label display-5 text-center">League of legends EU East Statistics</h4>
+      <img src="https://cdn.faceit.com/games/game-covers/lol_game_cover_2000x100.jpg" width="100%" height="100px">
+      <div class="stats">
+        <table class="table table-bordered">
+          <tbody>
+              <tr>
+                  <th>ELO</th>
+                  <th>{{elo['lol_EUN'][0]}}</th>
+                </tr>
+                <tr>
+                    <th>Skill level</th>
+                    <th>{{elo['lol_EUN'][1]}}</th>
+                  </tr>
+            <tr *ngFor="let stat of gamesStats['lol_EUN']">
+              <th>{{stat[0]}}</th>
+              <th>{{setWinsAndLoses(stat[1])}}</th>
+              <!-- <th>{{gamesStats['csgo'][{{stat}}][0]}}</th> -->
+            </tr>
+          </tbody>
+        </table>
+        <div class="round-graph">
+          <span>Matches</span>
+          <div>
+            <canvas baseChart
+                    [data]="pieChartData_loleun"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lol-na" *ngIf="gamesStats['lol_NA']">
+      <h4 class="label display-5 text-center">League of legends North America Statistics</h4>
+      <img src="https://cdn.faceit.com/games/game-covers/lol_game_cover_2000x100.jpg" width="100%" height="100px">
+      <div class="stats">
+        <table class="table table-bordered">
+          <tbody>
+              <tr>
+                  <th>ELO</th>
+                  <th>{{elo['lol_NA'][0]}}</th>
+                </tr>
+                <tr>
+                    <th>Skill level</th>
+                    <th>{{elo['lol_NA'][1]}}</th>
+                  </tr>
+            <tr *ngFor="let stat of gamesStats['lol_NA']">
+              <th>{{stat[0]}}</th>
+              <th>{{setWinsAndLoses(stat[1])}}</th>
+              <!-- <th>{{gamesStats['csgo'][{{stat}}][0]}}</th> -->
+            </tr>
+          </tbody>
+        </table>
+        <div class="round-graph">
+          <span>Matches</span>
+          <div>
+            <canvas baseChart
+                    [data]="pieChartData_lolna"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wot-eu" *ngIf="gamesStats['wot_EU']">
+      <h4 class="label display-5 text-center">World of tanks Europa Statistics</h4>
+      <img src="https://cdn.faceit.com/games/game-covers/wot_game_cover_2000x100.jpg" width="100%" height="100px">
+      <div class="stats">
+        <table class="table table-bordered">
+          <tbody>
+              <tr>
+                  <th>ELO</th>
+                  <th>{{elo['wot_EU'][0]}}</th>
+                </tr>
+                <tr>
+                    <th>Skill level</th>
+                    <th>{{elo['wot_EU'][1]}}</th>
+                  </tr>
+            <tr *ngFor="let stat of gamesStats['wot_EU']">
+              <th>{{stat[0]}}</th>
+              <th>{{setWinsAndLoses(stat[1])}}</th>
+              <!-- <th>{{gamesStats['csgo'][{{stat}}][0]}}</th> -->
+            </tr>
+          </tbody>
+        </table>
+        <div class="round-graph">
+          <span>Matches</span>
+          <div>
+            <canvas baseChart
+                    [data]="pieChartData_woteu"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wot-ru" *ngIf="gamesStats['wot_RU']">
+      <h4 class="label display-5 text-center">World of tanks Russia Statistics</h4>
+      <img src="https://cdn.faceit.com/games/game-covers/wot_game_cover_2000x100.jpg" width="100%" height="100px">
+      <div class="stats">
+        <table class="table table-bordered">
+          <tbody>
+              <tr>
+                  <th>ELO</th>
+                  <th>{{elo['wot_RU'][0]}}</th>
+                </tr>
+                <tr>
+                    <th>Skill level</th>
+                    <th>{{elo['wot_RU'][1]}}</th>
+                  </tr>
+            <tr *ngFor="let stat of gamesStats['wot_RU']">
+              <th>{{stat[0]}}</th>
+              <th>{{setWinsAndLoses(stat[1])}}</th>
+              <!-- <th>{{gamesStats['csgo'][{{stat}}][0]}}</th> -->
+            </tr>
+          </tbody>
+        </table>
+        <div class="round-graph">
+          <span>Matches</span>
+          <div>
+            <canvas baseChart
+                    [data]="pieChartData_wotru"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wot-na" *ngIf="gamesStats['wot_NA']">
+      <h4 class="label display-5 text-center">World of tanks North America Statistics</h4>
+      <img src="https://cdn.faceit.com/games/game-covers/wot_game_cover_2000x100.jpg" width="100%" height="100px">
+      <div class="stats">
+        <table class="table table-bordered">
+          <tbody>
+              <tr>
+                  <th>ELO</th>
+                  <th>{{elo['wot_NA'][0]}}</th>
+                </tr>
+                <tr>
+                    <th>Skill level</th>
+                    <th>{{elo['wot_NA'][1]}}</th>
+                  </tr>
+            <tr *ngFor="let stat of gamesStats['wot_NA']">
+              <th>{{stat[0]}}</th>
+              <th>{{setWinsAndLoses(stat[1])}}</th>
+              <!-- <th>{{gamesStats['csgo'][{{stat}}][0]}}</th> -->
+            </tr>
+          </tbody>
+        </table>
+        <div class="round-graph">
+          <span>Matches</span>
+          <div>
+            <canvas baseChart
+                    [data]="pieChartData_wotna"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="smite" *ngIf="gamesStats['smite']">
+      <h4 class="label display-5 text-center">Smite Statistics</h4>
+      <img src="https://cdn.faceit.com/games/game-covers/smite_game_cover_2000x100.jpg" width="100%" height="100px">
+      <div class="stats">
+        <table class="table table-bordered">
+          <tbody>
+              <tr>
+                  <th>ELO</th>
+                  <th>{{elo['smite'][0]}}</th>
+                </tr>
+                <tr>
+                    <th>Skill level</th>
+                    <th>{{elo['smite'][1]}}</th>
+                  </tr>
+            <tr *ngFor="let stat of gamesStats['smite']">
+              <th>{{stat[0]}}</th>
+              <th>{{setWinsAndLoses(stat[1])}}</th>
+              <!-- <th>{{gamesStats['csgo'][{{stat}}][0]}}</th> -->
+            </tr>
+          </tbody>
+        </table>
+        <div class="round-graph">
+          <span>Matches</span>
+          <div>
+            <canvas baseChart
+                    [data]="pieChartData_smite"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
       </div>
     </div>
   </div>

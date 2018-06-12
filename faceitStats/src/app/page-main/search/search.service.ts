@@ -123,6 +123,14 @@ export class SearchService {
         return this.http.get(url, { headers: headers });
     }
 
+    getPlayerStatsByGame(playerId: string, gameURL: string) {
+        const url = 'https://open.faceit.com/data/v4/players/' + playerId + '/stats/' + gameURL;
+        const headers = new HttpHeaders()
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+            .set('Authorization', this.token);
+        return this.http.get(url, { headers: headers });
+    }
+
     timeConverter(UNIX_timestamp) {
         const a = new Date(UNIX_timestamp * 1000);
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];

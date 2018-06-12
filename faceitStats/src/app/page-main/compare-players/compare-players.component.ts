@@ -43,8 +43,8 @@ export class ComparePlayersComponent implements OnInit {
             if (Array.isArray(stats['lifetime'][this.statsKeys[i]])) {
               this.setWinsAndLoses(stats['lifetime'][this.statsKeys[i]]);
             }
-            this.playerStats[this.statsKeys[i]] = [this.playerStats[this.statsKeys[i]], stats['lifetime'][this.statsKeys[i]]];
-
+            // this.playerStats[this.statsKeys[i]] = [this.playerStats[this.statsKeys[i]], [stats['lifetime'][this.statsKeys[i]]]];
+            this.playerStats[this.statsKeys[i]].push(stats['lifetime'][this.statsKeys[i]]);
           }
           else {
             if (Array.isArray(stats['lifetime'][this.statsKeys[i]])) {
@@ -55,6 +55,78 @@ export class ComparePlayersComponent implements OnInit {
         }
       });
     });
+  }
+
+  findMax(playerStats: number, key: string) {
+    if (this.playerStats[key].length > 1) {
+      if (!Array.isArray(playerStats)) {
+        playerStats = Number(playerStats);
+        // for (let i = 0; i < this.playerStats[key].length; i++) {
+        let value = this.playerStats[key].map(Number);
+        var max = value.reduce(function (a, b) {
+          return Math.max(a, b);
+        });
+        if (max === playerStats) {
+          return 'green';
+        }
+        else {
+          return 'red';
+        }
+        // }
+      }
+      else {
+        return 'black';
+      }
+    }
+    else {
+      return 'black';
+    }
+  }
+  compareLevel(playerStats, key) {
+    if (this.levelArray.length > 1) {
+      if (!Array.isArray(playerStats)) {
+        playerStats = Number(playerStats);
+        let value = this.levelArray.map(Number);
+        var max = value.reduce(function (a, b) {
+          return Math.max(a, b);
+        });
+        if (max === playerStats) {
+          return 'green';
+        }
+        else {
+          return 'red';
+        }
+       }
+      else {
+        return 'black';
+      }
+    }
+    else {
+      return 'black';
+    }
+  }
+  compareElo(playerStats, key) {
+    if (this.eloArray.length > 1) {
+      if (!Array.isArray(playerStats)) { 
+        playerStats = Number(playerStats);
+        let value = this.eloArray.map(Number);
+        var max = value.reduce(function (a, b) {
+          return Math.max(a, b);
+        });
+        if (max === playerStats) {
+          return 'green';
+        }
+        else {
+          return 'red';
+        }
+      }
+      else {
+        return 'black';
+      }
+    }
+    else {
+      return 'black';
+    }
   }
 
   setWinsAndLoses(matches: any) {

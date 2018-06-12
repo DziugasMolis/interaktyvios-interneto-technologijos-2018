@@ -9,7 +9,7 @@
         </div>
       </div>
     </div>
-    <table class="table table-striped">
+    <table class="table table-striped" *ngIf="statsKeys.length !== 0">
       <thead>
         <tr>
           <th>Name</th>
@@ -17,21 +17,24 @@
         </tr>
       </thead>
       <tbody *ngIf="statsKeys.length !== 0">
-        <tr *ngFor="let key of statsKeys">
-          <td>{{key}}</td>
-          <td *ngFor="let playerStats of playerStats[key]">{{playerStats}}</td>
-        </tr>
         <tr>
           <td>ELO</td>
-          <td *ngFor="let elo of eloArray">{{elo}}</td>
+          <td *ngFor="let elo of eloArray" [style.color]="compareElo(elo, key)">{{elo}}</td>
         </tr>
         <tr>
           <td>Skill Level</td>
-          <td *ngFor="let level of levelArray">{{level}}</td>
+          <td *ngFor="let level of levelArray" [style.color]="compareLevel(level, key)">{{level}}</td>
         </tr>
+        <tr *ngFor="let key of statsKeys">
+          <td>{{key}}</td>
+          <td *ngFor="let playerStats of playerStats[key]; let i = index" [style.color]="findMax(playerStats, key)">{{playerStats}}</td>
+        </tr>
+
         <tr>
           <td>Remove</td>
-          <td *ngFor="let level of levelArray; let i = index"><i class="fa fa-minus-square" (click)=removePlayer(i)></i></td>
+          <td *ngFor="let level of levelArray; let i = index">
+            <i class="fa fa-minus-square" (click)=removePlayer(i)></i>
+          </td>
         </tr>
       </tbody>
     </table>

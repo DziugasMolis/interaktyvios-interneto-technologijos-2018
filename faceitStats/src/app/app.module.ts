@@ -19,7 +19,7 @@ import { BestPlayersByCountryComponent } from './page-main/best-players-by-count
 import { AppRoutingModule } from './app-routing.module';
 import { SearchService } from './page-main/search/search.service';
 
-
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,8 @@ import { SearchService } from './page-main/search/search.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
 
   ],
   providers: [
